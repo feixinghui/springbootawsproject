@@ -5,11 +5,16 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.context.i18n.LocaleContextHolder;
 import java.util.Locale;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Created by xinghui on 5/1/17.
  */
 @Service
 public class i18NService {
+
+    /** The application logger */
+    private static final Logger LOG = LoggerFactory.getLogger(i18NService.class);
     @Autowired
     private MessageSource messageSource;
 
@@ -18,6 +23,7 @@ public class i18NService {
        * @param messageId The key to the messages resource file
        **/
       public String getMessage(String messageId) {
+              LOG.info("Returning i18n text for messageId {}", messageId);
               Locale locale = LocaleContextHolder.getLocale();
               return getMessage(messageId, locale);
           }
